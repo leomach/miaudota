@@ -7,27 +7,23 @@ public class Teste {
         Scanner sc = new Scanner(System.in);
 
         // Arrays simples para armazenar até 10 tutores, adotantes e processos
-        Tutor[] tutores = new Tutor[10];
-        int qtdTutores = 0;
-        Adotante[] adotantes = new Adotante[10];
-        int qtdAdotantes = 0;
+        Usuario[] usuarios = new Usuario[10];
+        int qtdUsuarios = 0;
         ProcessoAdocao[] processos = new ProcessoAdocao[10];
         int qtdProcessos = 0;
 
         int opcao = -1;
         while (opcao != 0) {
             System.out.println("\n--- Menu MiauDota ---");
-            System.out.println("1. Cadastrar Tutor");
+            System.out.println("1. Cadastrar Usuario");
             System.out.println("2. Atualizar informações do Tutor");
             System.out.println("3. Listar animais do Tutor");
-            System.out.println("4. Cadastrar Adotante");
-            System.out.println("5. Atualizar informações do Adotante");
-            System.out.println("6. Visualizar histórico do Adotante");
-            System.out.println("7. Iniciar processo de adoção");
-            System.out.println("8. Aprovar/Reprovar adoção");
-            System.out.println("9. Finalizar processo de adoção");
-            System.out.println("10. Registrar feedback");
-            System.out.println("11. Exibir detalhes do processo");
+            System.out.println("4. Visualizar histórico do usuário");
+            System.out.println("5. Iniciar processo de adoção");
+            System.out.println("6. Aprovar/Reprovar adoção");
+            System.out.println("7. Finalizar processo de adoção");
+            System.out.println("8. Registrar feedback");
+            System.out.println("9. Exibir detalhes do processo");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = sc.nextInt();
@@ -35,7 +31,7 @@ public class Teste {
 
             switch (opcao) {
                 case 1:
-                    if (qtdTutores < tutores.length) {
+                    if (qtdUsuarios < usuarios.length) {
                         System.out.print("Nome do Tutor: ");
                         String nome = sc.nextLine();
                         System.out.print("CPF: ");
@@ -57,29 +53,30 @@ public class Teste {
                         System.out.print("Email: ");
                         String email = sc.nextLine();
                         System.out.print("ID do Tutor: ");
-                        int idTutor = sc.nextInt(); sc.nextLine();
+                        int idPessoa = qtdUsuarios + 1;
+                        System.out.println(idPessoa);
                         System.out.print("Status da Conta (true=Ativa/false=Inativa): ");
                         boolean statusConta = sc.nextBoolean(); sc.nextLine();
 
                         Endereco end = new Endereco(rua, numero, bairro, cidade, cep, estado, telefone, email);
-                        Tutor t = new Tutor(nome, cpf, end, new Date(), idTutor, statusConta);
-                        tutores[qtdTutores++] = t;
+                        Usuario t = new Usuario(nome, cpf, end, new Date(), idPessoa, statusConta);
+                        usuarios[qtdUsuarios++] = t;
                         System.out.println("Tutor cadastrado!");
                     } else {
                         System.out.println("Limite de tutores atingido.");
                     }
                     break;
                 case 2:
-                    if (qtdTutores == 0) {
+                    if (qtdUsuarios == 0) {
                         System.out.println("Nenhum tutor cadastrado.");
                         break;
                     }
                     System.out.print("Digite o ID do Tutor para atualizar: ");
                     int idAtualizar = sc.nextInt(); sc.nextLine();
-                    Tutor tutorAtualizar = null;
-                    for (int i = 0; i < qtdTutores; i++) {
-                        if (tutores[i].getIdTutor() == idAtualizar) {
-                            tutorAtualizar = tutores[i];
+                    Usuario tutorAtualizar = null;
+                    for (int i = 0; i < qtdUsuarios; i++) {
+                        if (usuarios[i].getIdPessoa() == idAtualizar) {
+                            tutorAtualizar = usuarios[i];
                             break;
                         }
                     }
@@ -94,16 +91,16 @@ public class Teste {
                     }
                     break;
                 case 3:
-                    if (qtdTutores == 0) {
+                    if (qtdUsuarios == 0) {
                         System.out.println("Nenhum tutor cadastrado.");
                         break;
                     }
                     System.out.print("Digite o ID do Tutor para listar animais: ");
                     int idListar = sc.nextInt(); sc.nextLine();
-                    Tutor tutorListar = null;
-                    for (int i = 0; i < qtdTutores; i++) {
-                        if (tutores[i].getIdTutor() == idListar) {
-                            tutorListar = tutores[i];
+                    Usuario tutorListar = null;
+                    for (int i = 0; i < qtdUsuarios; i++) {
+                        if (usuarios[i].getIdPessoa() == idListar) {
+                            tutorListar = usuarios[i];
                             break;
                         }
                     }
@@ -114,88 +111,27 @@ public class Teste {
                     }
                     break;
                 case 4:
-                    if (qtdAdotantes < adotantes.length) {
-                        System.out.print("Nome do Adotante: ");
-                        String nomeA = sc.nextLine();
-                        System.out.print("CPF: ");
-                        String cpfA = sc.nextLine();
-                        System.out.print("Rua: ");
-                        String ruaA = sc.nextLine();
-                        System.out.print("Número: ");
-                        int numeroA = sc.nextInt(); sc.nextLine();
-                        System.out.print("Bairro: ");
-                        String bairroA = sc.nextLine();
-                        System.out.print("Cidade: ");
-                        String cidadeA = sc.nextLine();
-                        System.out.print("CEP: ");
-                        String cepA = sc.nextLine();
-                        System.out.print("Estado: ");
-                        String estadoA = sc.nextLine();
-                        System.out.print("Telefone: ");
-                        String telefoneA = sc.nextLine();
-                        System.out.print("Email: ");
-                        String emailA = sc.nextLine();
-                        System.out.print("ID do Adotante: ");
-                        int idAdotante = sc.nextInt(); sc.nextLine();
-                        System.out.print("Status da Adoção (true=Aprovado/false=Pendente): ");
-                        boolean statusAdocao = sc.nextBoolean(); sc.nextLine();
-                        System.out.print("Histórico de adoção: ");
-                        String historico = sc.nextLine();
-
-                        Endereco endA = new Endereco(ruaA, numeroA, bairroA, cidadeA, cepA, estadoA, telefoneA, emailA);
-                        Adotante a = new Adotante(nomeA, cpfA, endA, new Date(), idAdotante, statusAdocao, historico);
-                        adotantes[qtdAdotantes++] = a;
-                        System.out.println("Adotante cadastrado!");
+                    if (qtdUsuarios == 0) {
+                        System.out.println("Nenhum tutor cadastrado.");
+                        break;
+                    }
+                    System.out.print("Digite o ID do Usuário para visualizar histórico: ");
+                    int idUserHist = sc.nextInt(); sc.nextLine();
+                    Usuario userHist = null;
+                    for (int i = 0; i < qtdUsuarios; i++) {
+                        if (usuarios[i].getIdPessoa() == idUserHist) {
+                            userHist = usuarios[i];
+                            break;
+                        }
+                    }
+                    if (userHist != null) {
+                        System.out.println(userHist.visualizarHistórico());
                     } else {
-                        System.out.println("Limite de adotantes atingido.");
+                        System.out.println("Adotante não encontrado.");
                     }
                     break;
                 case 5:
-                    if (qtdAdotantes == 0) {
-                        System.out.println("Nenhum adotante cadastrado.");
-                        break;
-                    }
-                    System.out.print("Digite o ID do Adotante para atualizar: ");
-                    int idAdotAtualizar = sc.nextInt(); sc.nextLine();
-                    Adotante adotAtualizar = null;
-                    for (int i = 0; i < qtdAdotantes; i++) {
-                        if (adotantes[i].getIdAdotante() == idAdotAtualizar) {
-                            adotAtualizar = adotantes[i];
-                            break;
-                        }
-                    }
-                    if (adotAtualizar != null) {
-                        System.out.print("Novo nome: ");
-                        adotAtualizar.setNome(sc.nextLine());
-                        System.out.print("Novo CPF: ");
-                        adotAtualizar.setCpf(sc.nextLine());
-                        adotAtualizar.atualizarInformacoes();
-                    } else {
-                        System.out.println("Adotante não encontrado.");
-                    }
-                    break;
-                case 6:
-                    if (qtdAdotantes == 0) {
-                        System.out.println("Nenhum adotante cadastrado.");
-                        break;
-                    }
-                    System.out.print("Digite o ID do Adotante para visualizar histórico: ");
-                    int idAdotHist = sc.nextInt(); sc.nextLine();
-                    Adotante adotHist = null;
-                    for (int i = 0; i < qtdAdotantes; i++) {
-                        if (adotantes[i].getIdAdotante() == idAdotHist) {
-                            adotHist = adotantes[i];
-                            break;
-                        }
-                    }
-                    if (adotHist != null) {
-                        System.out.println(adotHist.visualizarHistórico());
-                    } else {
-                        System.out.println("Adotante não encontrado.");
-                    }
-                    break;
-                case 7:
-                    if (qtdTutores == 0 || qtdAdotantes == 0) {
+                    if (qtdUsuarios == 0 || qtdUsuarios == 0) {
                         System.out.println("É necessário pelo menos um tutor e um adotante cadastrados.");
                         break;
                     }
@@ -216,7 +152,7 @@ public class Teste {
                         System.out.println("Limite de processos atingido.");
                     }
                     break;
-                case 8:
+                case 6:
                     if (qtdProcessos == 0) {
                         System.out.println("Nenhum processo cadastrado.");
                         break;
@@ -238,7 +174,7 @@ public class Teste {
                         System.out.println("Processo não encontrado.");
                     }
                     break;
-                case 9:
+                case 7:
                     if (qtdProcessos == 0) {
                         System.out.println("Nenhum processo cadastrado.");
                         break;
@@ -258,7 +194,7 @@ public class Teste {
                         System.out.println("Processo não encontrado.");
                     }
                     break;
-                case 10:
+                case 8:
                     if (qtdProcessos == 0) {
                         System.out.println("Nenhum processo cadastrado.");
                         break;
@@ -280,7 +216,7 @@ public class Teste {
                         System.out.println("Processo não encontrado.");
                     }
                     break;
-                case 11:
+                case 9:
                     if (qtdProcessos == 0) {
                         System.out.println("Nenhum processo cadastrado.");
                         break;

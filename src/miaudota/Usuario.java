@@ -1,21 +1,57 @@
 package miaudota;
 import java.util.Date;
 
-public abstract class Usuario {
-    protected String nome;
-    protected String cpf;
-    protected Endereco endereco;
-    protected Date dataCadastro;
+public class Usuario extends Pessoa {
+    private String nome;
+    private String cpf;
+    private Endereco endereco;
+    private Date dataCadastro;
 
-    public Usuario(String nome, String cpf, Endereco endereco, Date dataCadastro) {
+    public Usuario(String nome, String cpf, Endereco endereco, Date dataCadastro, int idPessoa, boolean statusConta) {
+        super(idPessoa, statusConta);
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
         this.dataCadastro = dataCadastro;
     }
 
-    public abstract void cadastrar();
-    public abstract void atualizarInformacoes();
+    @Override
+    public void cadastrar(){
+        if (nome == null || nome.isEmpty()) {
+            System.out.println("ERRO:  O nome do Pessoa não pode estar vazio.");
+            return;
+        }
+        if (cpf == null || cpf.isEmpty()) {
+            System.out.println("ERRO:  O CPF do Pessoa não pode estar vazio.");
+            return;
+        }
+
+        System.out.println("Cadastrando Pessoa no sistema....");
+        System.out.println("ID: " + idPessoa);
+        System.out.println("Nome: " + nome);
+        System.out.println("CPF: " + cpf);
+        System.out.println("Status da Conta: " + (statusConta ? "Ativa" : "Inativa"));
+
+        System.out.println("Pessoa cadastrado com sucesso!");
+    }
+
+    @Override
+    public void atualizarInformacoes() {
+        if (nome == null || nome.isEmpty()) {
+            System.out.println("ERRO: O nome do Pessoa não pode estar vazio.");
+            return;
+        }
+
+        System.out.println("Atualizando informações do Pessoa");
+        System.out.println("Nome: " + nome);
+        System.out.println("CPF: " + cpf);
+        System.out.println("Telefone: " + endereco.getTelefone());
+        System.out.println("Email: " + endereco.getEmail());
+        System.out.println("Endereço: " + endereco);
+        System.out.println("Status da conta: " + (statusConta ? "Ativa" : "Inativa"));
+
+        System.out.println("Informações de Pessoa atualizada com sucesso!");
+    }
 
     public String getNome() {
         return nome;
