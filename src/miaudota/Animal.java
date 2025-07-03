@@ -18,7 +18,7 @@ public abstract class Animal {
     protected TipoAnimal tipo;
 
     public Animal(int id, String nome, String raca, int idade, String sexo, String porte, double peso, String cor,
-                  String descricao, Date dataCadastro, boolean vacinado, boolean castrado, TipoAnimal tipo) {
+            String descricao, Date dataCadastro, boolean vacinado, boolean castrado, TipoAnimal tipo) {
         this.id = id;
         this.nome = nome;
         this.raca = raca;
